@@ -45,6 +45,15 @@ if version >= 700
     compiler gcc
 endif
 
+nnoremap d "_d
+vnoremap d "_d
+nnoremap D "_D
+vnoremap D "_D
+nnoremap c "_c
+vnoremap c "_c
+nnoremap C "_C
+vnoremap C "_C
+xnoremap p pgvy
 
 let g:NeoComplCache_EnableAtStartup = 1 " Old neocomplcache
 let g:neocomplcache_enable_at_startup = 1 " New neocomplcache
