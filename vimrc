@@ -45,15 +45,6 @@ if version >= 700
     compiler gcc
 endif
 
-nnoremap d "_d
-vnoremap d "_d
-nnoremap D "_D
-vnoremap D "_D
-nnoremap c "_c
-vnoremap c "_c
-nnoremap C "_C
-vnoremap C "_C
-xnoremap p pgvy
 
 let g:NeoComplCache_EnableAtStartup = 1 " Old neocomplcache
 let g:neocomplcache_enable_at_startup = 1 " New neocomplcache
@@ -353,9 +344,16 @@ function! ViewComments(...)
 endfunction
 command! -nargs=1 ViewComments call ViewComments('<args>')
 
+" 定义快捷键的前缀，即<Leader>
+let mapleader=";"
+
 call plug#begin('~/.vim/plugged')
 
 " Make sure you use single quotes
+
+" fancy stuff from https://www.youtube.com/watch?v=wlR5gYd6um0
+Plug 'tpope/vim-surround'
+Plug 'vim-scripts/ReplaceWithRegister'
 
 " Shorthand notation; fetches https://github.com/junegunn/vim-easy-align
 Plug 'junegunn/vim-easy-align'
@@ -391,6 +389,8 @@ let g:go_highlight_operators = 1
 let g:go_highlight_extra_types = 1
 let g:go_highlight_methods = 1
 let g:go_highlight_generate_tags = 1
+noremap <Leader>l :GoLint<CR>
+noremap <Leader>v :GoBuild<CR>
 
 Plug 'junegunn/vim-easy-align'
 Plug 'Yggdroot/LeaderF' , { 'do': './install.sh' }
@@ -407,8 +407,6 @@ let g:Lf_NormalMap = {
     \ "Colorscheme":    [["<ESC>", ':exec g:Lf_py "colorschemeExplManager.quit()"<CR>']],
     \ }
 
-" 定义快捷键的前缀，即<Leader>
-let mapleader=";"
 
 " search word under cursor, the pattern is treated as regex, and enter normal mode directly
 noremap <Leader>f :<C-U><C-R>=printf("Leaderf! rg -e %s ", expand("<cword>"))<CR>
