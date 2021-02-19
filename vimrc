@@ -353,7 +353,10 @@ call plug#begin('~/.vim/plugged')
 
 " fancy stuff from https://www.youtube.com/watch?v=wlR5gYd6um0
 Plug 'tpope/vim-surround'
+Plug 'tpope/vim-abolish'
+Plug 'tpope/vim-commentary'
 Plug 'vim-scripts/ReplaceWithRegister'
+Plug 'christoomey/vim-system-copy'
 
 " Shorthand notation; fetches https://github.com/junegunn/vim-easy-align
 Plug 'junegunn/vim-easy-align'
