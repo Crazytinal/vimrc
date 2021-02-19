@@ -347,6 +347,10 @@ command! -nargs=1 ViewComments call ViewComments('<args>')
 " 定义快捷键的前缀，即<Leader>
 let mapleader=";"
 
+" 相对行数
+vmap <Leader>s :set relativenumber!<CR>
+nmap <Leader>s :set relativenumber!<CR>
+
 call plug#begin('~/.vim/plugged')
 
 " Make sure you use single quotes
