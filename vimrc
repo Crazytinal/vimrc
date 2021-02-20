@@ -362,6 +362,12 @@ Plug 'tpope/vim-commentary'
 Plug 'vim-scripts/ReplaceWithRegister'
 Plug 'christoomey/vim-system-copy'
 
+" text object
+Plug 'kana/vim-textobj-entire'
+Plug 'kana/vim-textobj-line'
+Plug 'kana/vim-textobj-indent'
+Plug 'kana/vim-textobj-entire'
+
 " Shorthand notation; fetches https://github.com/junegunn/vim-easy-align
 Plug 'junegunn/vim-easy-align'
 " Start interactive EasyAlign in visual mode (e.g. vipga)
