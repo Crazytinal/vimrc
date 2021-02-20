@@ -363,6 +363,8 @@ Plug 'vim-scripts/ReplaceWithRegister'
 Plug 'christoomey/vim-system-copy'
 
 " text object
+
+Plug 'kana/vim-textobj-user'
 Plug 'kana/vim-textobj-entire'
 Plug 'kana/vim-textobj-line'
 Plug 'kana/vim-textobj-indent'
