@@ -411,7 +411,7 @@ Plug 'junegunn/vim-easy-align'
 Plug 'Yggdroot/LeaderF' , { 'do': './install.sh' }
 let g:Lf_ShortcutF = '<c-p>'
 noremap <c-m> :LeaderfMru<cr>
-noremap <c-f> :LeaderfFunction!<cr>
+noremap <c-d> :LeaderfFunction!<cr>
 noremap <c-y> :LeaderfBufTag<cr>
 let g:Lf_NormalMap = {
     \ "File":   [["<ESC>", ':exec g:Lf_py "fileExplManager.quit()"<CR>']],
