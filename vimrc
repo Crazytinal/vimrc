@@ -45,6 +45,12 @@ if version >= 700
     compiler gcc
 endif
 
+" Quicker window movement
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-h> <C-w>h
+nnoremap <C-l> <C-w>l
+
 
 let g:NeoComplCache_EnableAtStartup = 1 " Old neocomplcache
 let g:neocomplcache_enable_at_startup = 1 " New neocomplcache
