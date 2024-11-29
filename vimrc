@@ -21,6 +21,8 @@ if !isdirectory(expand(&backupdir))
     endif
 endif
 
+" decrease input latency
+set tm=600
 " input settings
 set backspace=2
 set tabstop=4
@@ -31,6 +33,7 @@ set expandtab " expand tab to spaces
 
 " indent settiongs
 set autoindent
+set autowrite
 set smartindent
 set cindent
 set cinoptions=:0,g0,t0,(0,Ws,m1
@@ -50,6 +53,12 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-h> <C-w>h
 nnoremap <C-l> <C-w>l
+nnoremap <C-c> <C-w>c
+
+inoremap jj <Esc>
+nnoremap <Bslash> i<Enter><Esc>k$
+nnoremap <Leader>e i"+<Enter>"<Esc>
+
 
 
 let g:NeoComplCache_EnableAtStartup = 1 " Old neocomplcache
@@ -64,7 +73,7 @@ set showmode
 set wildmenu
 set wildmode=longest:full,full
 if version >= 703
-    set colorcolumn=80,100
+    set colorcolumn=145
 endif
 
 " status line
@@ -354,17 +363,37 @@ command! -nargs=1 ViewComments call ViewComments('<args>')
 let mapleader=";"
 
 " 相对行数
-vmap <Leader>s :set relativenumber!<CR>
-nmap <Leader>s :set relativenumber!<CR>
+vnoremap <Leader>s :set relativenumber!<CR>
+nnoremap <Leader>s :set relativenumber!<CR>
+nnoremap <Leader>c :!make proc<CR>
+nnoremap <Leader>m :!make<CR>
 
 call plug#begin('~/.vim/plugged')
 
+
 " Make sure you use single quotes
+
+" Track the engine.
+Plug 'SirVer/ultisnips'
+
+" Snippets are separated from the engine. Add this if you want them:
+Plug 'honza/vim-snippets'
+
+" Trigger configuration. You need to change this to something other than <tab> if you use one of the following:
+" - https://github.com/Valloric/YouCompleteMe
+" - https://github.com/nvim-lua/completion-nvim
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
 
 " fancy stuff from https://www.youtube.com/watch?v=wlR5gYd6um0
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-repeat'
 Plug 'vim-scripts/ReplaceWithRegister'
 Plug 'christoomey/vim-system-copy'
 
@@ -410,13 +439,17 @@ let g:go_highlight_operators = 1
 let g:go_highlight_extra_types = 1
 let g:go_highlight_methods = 1
 let g:go_highlight_generate_tags = 1
+
+let g:go_def_mode='gopls'
 noremap <Leader>l :GoLint<CR>
 noremap <Leader>v :GoBuild<CR>
+noremap <Leader>r :GoReferrers<CR>
+noremap <Leader>rr :GoReferrers<CR>:ll2<CR>
 
 Plug 'junegunn/vim-easy-align'
 Plug 'Yggdroot/LeaderF' , { 'do': './install.sh' }
 let g:Lf_ShortcutF = '<c-p>'
-noremap <c-m> :LeaderfMru<cr>
+noremap <Leader>u :LeaderfMru<cr>
 noremap <c-d> :LeaderfFunction!<cr>
 noremap <c-y> :LeaderfBufTag<cr>
 let g:Lf_NormalMap = {
@@ -440,7 +473,7 @@ noremap go :<C-U>Leaderf! rg --recall<CR>
 
 
 " search word under cursor in *.h and *.cpp files.
-noremap <Leader>c :<C-U><C-R>=printf("Leaderf! rg -e %s -g *.h -g *.cpp", expand("<cword>"))<CR>
+" noremap <Leader>c :<C-U><C-R>=printf("Leaderf! rg -e %s -g *.h -g *.cpp", expand("<cword>"))<CR>
 noremap <Leader>p :<C-U><C-R>=printf("Leaderf! rg -e %s -t protobuf", expand("<cword>"))<CR>
 noremap <Leader>g :<C-U><C-R>=printf("Leaderf! rg -e %s -t go", expand("<cword>"))<CR>
 
@@ -488,6 +521,8 @@ if !isdirectory(s:vim_tags)
 " Unmanaged plugin (manually installed and updated)
 Plug '~/my-prototype-plugin'
 
+Plug 'makerj/vim-pdf'
+
 " Initialize plugin system
 call plug#end()
 
@@ -520,6 +555,9 @@ set hlsearch
 " 搜索时大小写不敏感
 set ignorecase
 set smartcase
+
+set clipboard=unnamed
+set rnu
 
 syntax enable
 syntax on                    " 开启文件类型侦测
